@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style>
+        *{
+            background-image: url("http://pic1.win4000.com/wallpaper/c/53cdd1f7c1f21.jpg");
+        }
+        .button_class{
+            margin-left: 65%;
+            margin-top: 5%;
+            font: 50px/100px "arial",sans-serif;
+            width:20%;
+            height: 20%;
+            float: left;
+            background-color:transparent;
+        }
+        .button_class a{
+            color: lawngreen;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="button_class">
+        <span>请选择你的身份</span>
+        <li class="manager"><a href="{% url 'manager_login' %}">管理员</a></li>
+        <li class="tourist"><a href="{% url 'shopping' %}">游客</a></li>
+        <li class="member"><a href="{% url 'signin' %}">会员</a></li>
+    </div>
+</body>
+</html>

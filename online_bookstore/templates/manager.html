@@ -1,0 +1,273 @@
+{% extends 'base_for manage.html' %}
+
+{% block head %}
+    <style>
+        .index{
+            width: 1000px;
+            height: 400px;
+            background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1568018648927&di=cf1673396e4f8c670447723785bca839&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20160904%2F47b5a192f9c44c9f82aa991b988eb250_th.jpg");
+        }
+        .table{
+            width: 80%;
+            margin-left: 20px;
+            {#letter-spacing: 1px;#}
+        }
+        .form-control{
+            width: 300px;
+        }
+        .center-block {
+            display: block;
+            margin-left: 20%;
+            margin-right: auto;
+        }
+        .goods{
+            margin-left: 10%;
+            border-top:1px dashed red;
+            border-right:2px dotted green;
+            border-bottom:1px solid blue;
+            border-left:2px double pink;
+            border-radius:20px;
+            width:1000px;height:400px;
+        }
+        .xiu{
+            margin-left: 70%;
+            margin-top: -42%;
+            border-top:1px dashed red;
+            border-right:2px dotted green;
+            border-bottom:1px solid blue;
+            border-left:2px double pink;
+            border-radius:20px;
+            width:500px;height:602px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {% if deal == 'index' %}
+        <h1>首页</h1>
+        <h2>点击上方按钮选择你要进行的操作</h2>
+        <div class="index">
+
+        </div>
+    {% endif %}
+    {% if deal == 'change_member' %}
+        <form action="#" method="post">
+            <table>
+                <tr>
+                    <td>账户：</td>
+                    <td><input type="text" name="account"></td>
+                </tr>
+                <tr>
+                    <td>昵称：</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>联系电话：</td>
+                    <td><input type="text" name="telephone"></td>
+                </tr>
+                <tr>
+                    <td>邮箱：</td>
+                    <td><input type="text" name="email"></td>
+                </tr>
+                <tr>
+                    <td>地址：</td>
+                    <td><input type="text" name="address"></td>
+                </tr>
+                <tr>
+                    <td>密码：</td>
+                    <td><input type="password" name="pwd1"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="修改会员信息"></td>
+                </tr>
+            </table>
+        </form>
+    {% endif %}
+
+
+    {% if deal == 'send_goods' %}
+        <h1>未发货商品如下：</h1>
+            <table class="table">
+                 <thead>
+                    <tr>
+                        <th>订单ID</th>
+                        <th>下单时间</th>
+                        <th>订单总价(元)</th>
+                        <th>所属会员账号</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <form method="post" action="#">
+                        {% for data in send_goods_data %}
+                            <tr id = {{ data.0 }} class="goods_list">
+                                <td>{{ data.0 }}</td>
+                                <td>{{ data.1 }}</td>
+                                <td>{{ data.3 }}</td>
+                                <td>{{ data.4 }}</td>
+                                <td><button type="submit" name="order_ID" value={{ data.0 }}>发货</button></td>
+                        {% endfor %}
+                    </form>
+                </tbody>
+            </table>
+    {% endif %}
+
+
+    {% if deal == 'update_order' %}
+        <h3>选择你要修改的订单</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>订单ID</th>
+                    <th>下单时间</th>
+                    <th>发货时间</th>
+                    <th>总价</th>
+                    <th>买家ID</th>
+                    <th>图书ID</th>
+                    <th>所购图书数量</th>
+                    <th>订单包涵图书</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for key, value in order_informations.items %}
+                     <tr>
+                        {% for i in value.order_front %}
+                            <td rowspan="{{ value.number }}" rowspan=$row_host1 style='vertical-align: middle;'>{{ i }}</td>
+                        {% endfor %}
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                         <form action="#" method="post">
+                              <td rowspan="{{ value.number }}" rowspan=$row_host1 style='vertical-align: middle;'><button type="submit" name="delete_order" value={{ key }}>删除订单</button></td>
+                         </form>
+                    </tr>
+
+                    {% for book in value.books %}
+                        <tr>
+                            {% for book_data in book %}
+                                <td >{{ book_data }}</td>
+                            {% endfor %}
+                        </tr>
+
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+
+    {% if deal == 'update_goods' %}
+        <div class="goods">
+            <div class="center-block">
+                <h4>查找你要修改的图书名称</h4>
+                <form action="#" method="get">
+                    <input class="form-control" type="text" name="bno" placeholder="例如：数据库简明原理">
+                    <button type="submit">提交</button>
+                </form>
+                <h4>图书信息如下：</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>书号</th>
+                            <th>书名</th>
+                            <th>类别</th>
+                            <th>出版社</th>
+                            <th>作者</th>
+                            <th>简介</th>
+                            <th>售价</th>
+                            <th>折扣</th>
+                            <th>库存</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                {% for data in book_data %}
+                                <td>{{ data }}</td>
+                                {% endfor %}
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="goods">
+            <div class="center-block">
+                <h3>增删图书</h3>
+                <h4>批量导入图书信息，请输入图书信息文件路径</h4>
+                <form action="#" method="get">
+                    <input class="form-control" type="text" name="books_data_position" placeholder="例如：C:\\Users\\23263\Desktop\\books.xlsx">
+                    <button type="submit">提交</button>
+                </form>
+                <h4>输入图书的ID删除图书</h4>
+                <form action="#" method="get">
+                    <input class="form-control" type="text" name="delete_book_ID" placeholder="例如：E101">
+                    <button type="submit">确认删除</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="xiu">
+            <div class="center-block">
+                <h4>填写你要修改的字段并提交</h4>
+                <form action="#" method="post">
+                    <table>
+                        <tr>
+                            <td>图书ID：</td>
+                            <td><input type="text" name="bno" placeholder="必填项"></td>
+                        </tr>
+                        <tr>
+                            <td>书名：</td>
+                            <td><input type="text" name="bname"></td>
+                        </tr>
+                        <tr>
+                            <td>分类：</td>
+                            <td><input type="text" name="category"></td>
+                        </tr>
+                        <tr>
+                            <td>出版社：</td>
+                            <td><input type="text" name="press"></td>
+                        </tr>
+                        <tr>
+                            <td>作者：</td>
+                            <td><input type="text" name="author"></td>
+                        </tr>
+                        <tr>
+                            <td>简介：</td>
+                            <td><input type="password" name="survey"></td>
+                        </tr>
+                        <tr>
+                            <td>价格：</td>
+                            <td><input type="text" name="price"></td>
+                        </tr>
+                        <tr>
+                            <td>打折：</td>
+                            <td><input type="text" name="discount"></td>
+                        </tr>
+                        <tr>
+                            <td>库存：</td>
+                            <td><input type="text" name="stock"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" value="点击修改图书信息"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
+
+
+
+<script>
+  $('#myButton').on('click', function () {
+    var $btn = $(this).button('loading')
+    // business logic...
+    $btn.button('reset')
+  })
+</script>
+{% endblock %}

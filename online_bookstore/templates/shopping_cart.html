@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block head %}
+    <style>
+        .btn-group {
+                background: orange;
+                left: 90%;
+            }
+    </style>
+{% endblock %}
+{% block body %}
+
+<ul class="list-group">
+    {% for key,value in books.items %}
+        <li class="list-group-item">
+            {{ key }}
+
+            <div class="btn-group">
+                <form method="post" action="#">
+                    <td><button type="submit" name="book_plus" value={{ key }}>+</button></td>
+                    <h class="btn btn-default">{{ value }}</h>
+                    <td><button type="submit" name="book_reduce" value={{ key }}>-</button></td>
+                </form>
+
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+    <form method="post" action="#" class="create_order_class"><td><button type="submit" name="create_order" value={{ account }}>提交订单</button></td></form>
+
+{#    <script>#}
+{##}
+{#        var inp1 = document.getElementsByClassName("create_order_class");#}
+{#        inp1.addEventListener('click', fn1(), false);#}
+{#        function fn1() {#}
+{#            alert("提交成功");#}
+{#        }#}
+{##}
+{#    </script>#}
+
+{% endblock %}

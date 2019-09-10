@@ -1,0 +1,36 @@
+{% extends 'base_for manage.html' %}
+
+{% block head %}
+
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <style>
+        .login_form{
+            margin-top: 10%;
+            margin-left: 45%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="login_form">
+        <form action="" method="post">
+    {#        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">#}
+            {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>管理员账户</td>
+                        <td><input type="text" name="account"></td>
+                    </tr>
+                    <tr>
+                        <td>密码</td>
+                        <td><input type="password" name="password"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="登录"></td>
+                    </tr>
+                </table>
+        </form>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="btn-group">
+        <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        按种类查询 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{% url 'shopping' %}">查看全部</a></li>
+            <li><a href="?category=I">文学</a></li>
+            <li><a href="?category=E">亲子家教</a></li>
+            <li><a href="?category=J">建筑学</a></li>
+            <li><a href="?category=X">医学</a></li>
+        </ul>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>书标号</th>
+                <th>书名</th>
+                <th>类别</th>
+                <th>出版社</th>
+                <th>作者</th>
+                <th>概述</th>
+                <th>价格</th>
+                <th>折扣</th>
+                <th>库存量</th>
+            </tr>
+        </thead>
+        <tbody>
+        <form method="post" action="#">   <!--{% csrf_token %}-->
+            {% for book in books %}
+                <tr id = {{ book.0 }} class="goods_list">
+                    <td>{{ book.0 }}</td>
+                    <td>{{ book.1 }}</td>
+                    <td>{{ book.2 }}</td>
+                    <td>{{ book.3 }}</td>
+                    <td>{{ book.4 }}</td>
+                    <td>{{ book.5 }}</td>
+                    <td>{{ book.6 }}</td>
+                    <td>{{ book.7 }}</td>
+                    <td>{{ book.8 }}</td>
+                {% if front_user %}
+                    <td><button type="submit" name="book" value={{ book.0 }}>加入购物车</button></td>
+                {% endif %}
+
+                </tr>
+            {% endfor %}
+        </form>
+
+        </tbody>
+    </table>
+{% endblock %}

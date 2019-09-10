@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网上书店系统</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">管理员系统</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+            {% if manager_user %}
+{#                <li class="active"><a href="{% url 'manage' %}?account=send_goods">查看发货<span class="sr-only">(current)</span></a></li>#}
+                <li><a href="{% url 'shopping' %}">浏览图书<span class="sr-only">(current)</span></a></li>
+                <li><a href="{% url 'manage' deal='change_member' %}">修改会员信息<span class="sr-only">(current)</span></a></li>
+                <li><a href="{% url 'manage' deal='send_goods' %}">查看发货<span class="sr-only">(current)</span></a></li>
+                <li><a href="{% url 'manage' deal='update_order' %}">处理订单<span class="sr-only">(current)</span></a></li>
+                <li><a href="{% url 'manage' deal='update_goods' %}">更新图书<span class="sr-only">(current)</span></a></li>
+            {% endif %}
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if manager_user %}
+            <li><a href="#">尊敬的管理员，你好</a></li>
+            <li><a href="{% url 'home' %}">注销</a></li>
+        {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+{% block body %}{% endblock %}
+</body>
+</html>

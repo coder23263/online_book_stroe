@@ -1,0 +1,75 @@
+create table book(
+bno char(3) primary key,
+bname varchar(10),
+bauthor varchar(10),
+bprice int
+)
+
+
+###################      创建表books       ###################
+create table books(
+bno char(20) primary key,
+bname varchar(40) not null,
+category varchar(20),
+press varchar(40),
+author varchar(30),
+survey varchar(100),
+price float not null,
+discount float not null,
+stock int not null
+)
+
+#########################         创建表member         ########################
+create table member(
+mno char(10) primary key ,
+mpassword char(20) not null,
+mname varchar(30) not null,
+mphone char(11) not null,
+mpost char(30) not null,
+madress char(50) not null,
+)
+
+
+###############################         向member表中插入一条测试数据           ##################################
+INSERT INTO
+MEMBER(mno, mpassword, mname, mphone, mpost, madress)
+VALUES ('001', '23263', '生如夏花', '15200116240', '2326378712@qq.com', '河北省唐山市华北理工大学梅园')
+
+
+##############################     创建表order_form    ##########################
+create table order_form(
+ono char(50) primary key,
+submit_date date not null,
+send_date date,
+total_price float not null,
+mno char(10),
+foreign key (mno) references member(mno) on delete cascade,
+)
+
+##############################      创建表order_information    ########################
+create table order_information(
+bno char(20),
+ono char(50),
+order_number int not null,
+foreign key (bno) references books(bno) on delete cascade,
+foreign key (ono) references order_form(ono) on delete cascade,
+)
+#################################    向order_form表中插入数据，即生成订单     ##################################
+insert
+into order_form(ono, submit_date, send_date, total_price, mno)
+values('6564', '2019-6-5', '2019-6-7', 152.3, '001')
+
+############################              计算订单价格              ########################
+select price from books where bno='E101'
+
+
+###############   修改会员信息   ##############
+update member
+set mno='007',mpassword='777',mname='狂铁',mphone='15200116620',mpost='556@qq.com',madress='海南'
+where mno='007'
+
+###################        订单全部信息查询  连接表    ##############
+select order_form.ono,order_form.submit_date,send_date,total_price,mno,order_information.bno, order_number,bname
+from order_form,order_information,books
+where order_form.ono=order_information.ono and order_information.bno=books.bno
+group by order_form.ono,order_form.submit_date,send_date,total_price,mno,order_number,order_information.bno,bname

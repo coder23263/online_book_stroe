@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <style>
+        .input-group{
+            margin-left: 10%;
+            margin-top: 5%;
+        }
+        .input_content{
+            margin-left: 35%;
+            margin-top: 5%;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+{#<form action="" method="post">#}
+{#    <table>#}
+{#        <tr>#}
+{#            <td>账户：</td>#}
+{#            <td><input type="text" name="account"></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td>昵称：</td>#}
+{#            <td><input type="text" name="name"></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td>联系电话：</td>#}
+{#            <td><input type="text" name="telephone"></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td>邮箱：</td>#}
+{#            <td><input type="text" name="email"></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td>地址：</td>#}
+{#            <td><input type="text" name="address"></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td>密码：</td>#}
+{#            <td><input type="password" name="pwd1"></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td>重复密码：</td>#}
+{#            <td><input type="password" name="pwd2"></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td></td>#}
+{#            <td><input type="submit" value="注册"></td>#}
+{#        </tr>#}
+{#    </table>#}
+{#</form>#}
+{##}
+{##}
+{##}
+
+
+
+
+<div class="jumbotron">
+    <div class="input_content">
+        <h1>欢迎注册，加入我们</h1>
+        <div class="input-group">
+            <form action="" method="post">
+              <div class="form-group">
+                <label for="exampleInputEmail1">账户：</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="账户，例如：001" name="account">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">昵称：</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="昵称，例如：生如夏花" name="name">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">联系电话：</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="请输入手机号" name = "telephone">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">邮箱：</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="请输入邮箱" name="email">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">地址：</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="请输入地址" name="address">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">密码：</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请输入密码" name="pwd1">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">确认密码：</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="请确认密码" name="pwd2">
+              </div>
+
+              <button type="submit" class="btn btn-default">提交注册</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
